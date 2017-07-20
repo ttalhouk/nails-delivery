@@ -240,7 +240,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  autoprefixer-rails (~> 6.3.7)
+  autoprefixer-rails
   byebug
   capybara (= 2.7.1)
   guard (~> 2.14.0)
