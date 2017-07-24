@@ -66,3 +66,4 @@ gem 'mini_racer', platforms: :ruby
 
 gem 'devise'
 gem 'rails_admin', '~> 1.2'
+gem "paperclip", "~> 5.0.0"
