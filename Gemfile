@@ -13,7 +13,7 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 
-gem 'devise'
+
 
 gem 'autoprefixer-rails'
 # Use SCSS for stylesheets
@@ -63,3 +63,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mini_racer', platforms: :ruby
+
+gem 'devise'
+gem 'rails_admin', '~> 1.2'
