@@ -16,5 +16,7 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
+//= require react-flip-move.min
+//= require numeral.min
 //= require components
 //= require_tree .
