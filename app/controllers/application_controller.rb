@@ -7,10 +7,11 @@ class ApplicationController < ActionController::Base
       super
     else
       respond_to do |format|
-        format.html {redirect_to new_user_session_path, notice: 'Must be logged in'}
+        flash[:notice] = 'Please login or sign up to access.'
+        # flash.keep(:notice)
+        format.html {redirect_to new_user_session_path}
         format.json {
-
-          render json: {messages:'Must be logged.', redirect: "#{new_user_session_path}"}, status: 400
+          render json: {messages: flash[:notice], redirect: "#{new_user_session_path}"}, status: 400
         }
       end
        ## if you want render 404 page
