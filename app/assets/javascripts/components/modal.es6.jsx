@@ -36,11 +36,11 @@ class Modal extends React.Component {
         style={modalComponent} className="product-modal">
         <div
           style={modalStyle}
-          className="modal--content" >
+          className="product-modal--window" >
           {this.props.children}
         </div>
         <div
-          className="modal--backdrop"
+          className="product-modal--backdrop"
           style={backdropStyle} onClick={this.props.onClose()}>
         </div>
       </div>

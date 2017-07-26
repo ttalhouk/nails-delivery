@@ -334,6 +334,7 @@ DEPENDENCIES
   rails (~> 5.0.1)
   rails_admin (~> 1.2)
   react-rails
+  responders
   rspec-rails (= 3.5.2)
   sass-rails (~> 5.0)
   spring
