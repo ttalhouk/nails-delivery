@@ -15,7 +15,6 @@ class Product extends React.Component {
   }
 
   handleAddToCart() {
-    console.log('in add to cart');
     // ajax request to orders for user
     $.ajax({
       url: '/orders',
@@ -25,7 +24,7 @@ class Product extends React.Component {
       dataType: 'json'
     })
       .success((data) => {
-        console.log('in success ', data);
+
         this.props.updateMessage({success: `${this.props.product.name} successfully added to cart`})
         this.closeModal();
       })
@@ -43,16 +42,26 @@ class Product extends React.Component {
     // display message 'Item added' or 'Show Errors'
 
   }
+  renderLimitedQty(stock) {
+    if (stock < 10) {
+      return (
+        <div className='product-list--item-qty'>
+          {`Only ${stock} left!`}
+        </div>
+      )
+    }
+  }
 
   render () {
     const {id, name, description, stock, url} = this.props.product
     const price = numeral(this.props.product.price).format('$0,0.00')
     return (
-      <div className= "product--list-item">
-          <div onClick={this.openModal.bind(this)} className="product--list-item-link">
-            <h2>{name}</h2>
-            <img src={url} alt={`${name} image`}/>
-          </div>
+      <div className= "product-list--item">
+        <div onClick={this.openModal.bind(this)} className="product-list--item-link">
+          <h2>{name}</h2>
+          <img src={url} alt={`${name} image`}/>
+          {this.renderLimitedQty(stock)}
+        </div>
 
         <Modal
           isOpen={this.state.isModalOpen}
@@ -60,7 +69,7 @@ class Product extends React.Component {
           <div
             onClick={this.closeModal.bind(this)}
             className="product-modal--close-button">
-            [X]
+            <i className="ion-close"></i>
           </div>
           <div className="product-modal--content">
             <img
@@ -69,15 +78,20 @@ class Product extends React.Component {
               alt={`${name} image`}/>
             <div className="product-modal--details">
               <h2>{name}</h2>
-              <p>{description}</p>
+              <p>{_.truncate(description,{'length': 200, 'seperator': ' '})}</p>
               <p>Qty in Stock: {stock}</p>
               <p>{price}</p>
             </div>
-            <button
-              onClick={this.handleAddToCart.bind(this)}
-              className='button--order'>
-              Add to Cart
-            </button>
+            <div className="product-modal--controls">
+              <button
+                onClick={this.handleAddToCart.bind(this)}
+                className='button button--order'>
+                Add to Cart
+              </button>
+              <a
+                className='button button--link'
+                href={`/products/${id}`}>Product Details</a>
+            </div>
           </div>
         </Modal>
       </div>

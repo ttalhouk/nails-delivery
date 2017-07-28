@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NailsDelivery</title>
+    <title>Nails Delivery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -10,34 +12,10 @@
 
   <body>
 
-  <nav>
-    <h1>Nails Delivery</h1>
-    <div>
-      <ul>
-        <% if current_user %>
-        <li>
-          <%= link_to (edit_user_registration_path) do%>
-          Welcome Back: <%= current_user.email %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-        </li>
-        <% else %>
-        <li>
-          <%= link_to "Login", new_user_session_path %>
-        </li>
-        <li>
-          <%= link_to "Sign Up", new_user_registration_path %>
-        </li>
-        <% end %>
-        <li>
-          <%= link_to "Products", products_path %>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <%= render 'shared/navbar' %>
 
+  <main>
     <%= yield %>
+  </main>
   </body>
 </html>

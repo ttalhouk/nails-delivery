@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require lodash
 //= require react
 //= require react_ujs
 //= require react-flip-move.min

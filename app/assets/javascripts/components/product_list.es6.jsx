@@ -42,32 +42,47 @@ class ProductList extends React.Component {
   renderMessages(){
     if (this.state.statusMessage){
       return (
-        <div className="status-message--success">
+        <p>
           {this.state.statusMessage}
-        </div>
+        </p>
       )
     } else if (this.state.errorMessage){
       return (
-        <div className="status-message--error">
+        <p>
           {this.state.errorMessage}
-        </div>
+        </p>
       )
     }
     return
+  }
+  statusClass() {
+    if (this.state.statusMessage){
+      return 'status-message--success';
+    } else if (this.state.errorMessage){
+      return 'status-message--error';
+    }
+    return 'status-message--close';
   }
 
 
   render () {
     return (
       <div className='product--list'>
-        <SearchBar
+        <div className='product-list--header'>
+          <h2 className='product-list--title'>Available Products</h2>
+          <SearchBar
           handleSearch={() => this.handleSearch.bind(this)} searchTerm={this.state.searchTerm} />
-        { this.renderMessages() }
+        </div>
+        <div className={`status-message ${this.statusClass()}`}>
+          { this.renderMessages() }
+        </div>
         <FlipMove
+          className='product-list--showcase'
           duration={500}
           easing="ease-out">
           {this.renderProduct()}
         </FlipMove>
+
       </div>
     );
   }
