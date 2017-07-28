@@ -7,6 +7,12 @@ class ProductList extends React.Component {
       errorMessage: ''
     }
   }
+  componentWillMount() {
+    this.updateStatusMessage({
+      success: this.props.statusMessage,
+      error: this.props.errorMessage
+    })
+  }
 
   handleSearch(e){
     const searchTerm = e.target.value;
@@ -14,11 +20,12 @@ class ProductList extends React.Component {
   }
 
   renderProduct() {
-    return this.props.products
+    let filteredProducts = this.props.products
       .filter((product) => {
         return product.name.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 || product.description.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1
-      })
-      .map((product) => {
+      });
+    if (filteredProducts.length > 0){
+      return filteredProducts.map((product) => {
         return (
           <Product
             key={product.id}
@@ -26,6 +33,13 @@ class ProductList extends React.Component {
             updateMessage={(message) => { this.updateStatusMessage(message)}}/>
         )
       })
+    } else {
+      return (
+        <div>
+          <h2 className="no-product">No Products Match the Search Criteria</h2>
+        </div>
+      )
+    }
   }
 
   updateStatusMessage(message){
@@ -89,5 +103,7 @@ class ProductList extends React.Component {
 }
 
 ProductList.propTypes = {
-  products: React.PropTypes.array
+  products: React.PropTypes.array,
+  statusMessage: React.PropTypes.string,
+  errorMessage: React.PropTypes.string,
 };

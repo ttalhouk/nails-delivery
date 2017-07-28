@@ -1,5 +1,12 @@
-<% flash.each do |key, value| %>
-  <%= content_tag :div, value, class: "status-message--#{key}" %>
-  fix style!!!!!
-<% end %>
-<%= react_component "ProductList", {products: @products} %>
+<!-- <% flash.each do |key, value| %>
+  <div class="<%="status-message status-message--#{key}"%>" >
+    <p>
+      <%= value %>
+    </p>
+  </div>
+<% end %> -->
+<%= react_component "ProductList", {
+  products: @products,
+  statusMessage:flash[:success], 
+  errorMessage:flash[:error]
+  } %>

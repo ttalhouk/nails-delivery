@@ -26,5 +26,11 @@
         <%= @product.description %>
       </p>
     </div>
+    
+    <%= react_component 'ReviewList', {
+      product: @product,
+      user: current_user,
+      reviews: @product.reviews
+      }%>
   </div>
 </div>
