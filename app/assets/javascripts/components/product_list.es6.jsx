@@ -42,15 +42,20 @@ class ProductList extends React.Component {
     }
   }
 
-  updateStatusMessage(message){
-    if (message.error) {
-      this.setState({errorMessage: message.error})
-    }
-    this.setState({statusMessage: message.success});
-
+  resetMessages(){
     setTimeout(()=>{
       this.setState({errorMessage: '', statusMessage: ''})
     }, 10000)
+  }
+  updateStatusMessage(message){
+    if (message.error) {
+      this.setState({errorMessage: message.error});
+      this.resetMessages();
+    }
+    if (message.success) {
+      this.setState({statusMessage: message.success});
+      this.resetMessages();
+    }
 
   }
   renderMessages(){

@@ -5,11 +5,15 @@
   padding: .6rem 1.2rem;
   border: 1px solid;
   text-decoration: none;
+  outline: none;
 
   &--order {
     @include style-button($pink);
   }
   &--link {
     @include style-button;
+  }
+  &--action {
+    @include style-button($purple);
   }
 }

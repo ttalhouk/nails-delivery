@@ -87,3 +87,9 @@ nav {
     };
   }
 }
+
+input, textarea {
+  outline: none;
+  padding: .7rem;
+  font-size: 110%;
+}

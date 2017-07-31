@@ -24,19 +24,26 @@ class ReviewList extends React.Component {
   }
 
   renderReviewForm() {
-    if (this.state.openForm) {
-      return (
-        <ReviewForm
-          handleSubmit={this.handleFormSubmit.bind(this)}
-          />
-        )
-    } else {
-      return undefined;
-    }
+    return (
+      <ReviewForm
+        handleSubmit={this.handleFormSubmit.bind(this)}
+        openForm={this.state.openForm}
+        />
+      )
+    //
+    // if (this.state.openForm) {
+    //   return (
+    //     <ReviewForm
+    //       handleSubmit={this.handleFormSubmit.bind(this)}
+    //       openForm={this.state.openForm}
+    //       />
+    //     )
+    // } else {
+    //   return (<div className="review--form closed"></div>);
+    // }
   }
 
   handleOpenForm(){
-    console.log(this.state);
     this.setState({openForm: !this.state.openForm});
   }
 
@@ -44,15 +51,18 @@ class ReviewList extends React.Component {
   render () {
     return (
       <div className='page--review-section'>
-        <button
-          onClick={this.handleOpenForm.bind(this)}
-          className="button button--action">
-          {this.state.openForm ? "Close" : "Leave a Review"}
-        </button>
+        <div className='review'>
+          <button
+            onClick={this.handleOpenForm.bind(this)}
+            className="button button--action">
+            {this.state.openForm ? "Close" : "Leave a Review"}
+          </button>
+          <div className={`review--form__transition ${this.state.openForm ? "open": "closed"}`} >            
+            {this.renderReviewForm()}
+          </div>
 
-        {this.renderReviewForm()}
-
-        {this.renderReviews()}
+          {this.renderReviews()}
+        </div>
       </div>
     );
   }

@@ -45,10 +45,10 @@ class ReviewForm extends React.Component {
 
   render () {
     return (
-      <div className="review">
-        <p>If you own this product, please leave a review!</p>
+      <div className={`review--form ${this.props.openForm ? "open": "closed"}`}>
+        <p>If you own this product, please leave us a review!</p>
         <form
-          className="review--form"
+          className="review--form__container"
           onSubmit={this.handleFormSubmit.bind(this)}>
           <label htmlFor="title">
             Title:
@@ -64,7 +64,7 @@ class ReviewForm extends React.Component {
             <textarea
               onChange={(e)=> {this.setState({body: e.target.value})}}
               id='title'
-              className="review--input"
+              className="review--textarea"
               value={this.state.body}
               />
           </label>
