@@ -13,7 +13,8 @@ class ProductsController < ApplicationController
   end
 
   def show
-    p 'params: ' + params[:id]
+
     @product = Product.find(params[:id])
+
   end
 end

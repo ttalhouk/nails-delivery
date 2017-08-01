@@ -2,23 +2,45 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      openForm:false
+      openForm:false,
+      reviews: []
     }
   }
   componentWillMount(){
-    console.log('mounted');
+    this.setState({reviews: this.props.reviews})
+
   }
 
   handleFormSubmit(reviewData) {
     console.log(reviewData);
 
     // ajax request to review create route
+    $.ajax({
+      url: `/products/${this.props.product.id}/reviews`,
+      method: 'POST',
+      dataType: 'json',
+      data: {review: reviewData},
+      context: this
+    })
+      .success((data) => {
+        // this.props.updateMessage({success: `review successfully added`})
+        console.log(data);
+        this.setState({reviews: [data.review].concat(this.state.reviews)})
+        this.handleOpenForm();
+      })
+      .error((err) => {
+        if (err.responseJSON.redirect){
+          window.location.replace(err.responseJSON.redirect)
+        } else {
+          console.log(err.responseJSON);
+        }
+      })
   }
 
   renderReviews() {
-    return this.props.reviews.map((review) => {
+    return this.state.reviews.map((review) => {
       return(
-        <Review key={review.id} review={review} />
+        <Review key={review.id} review={review} user={this.props.user} />
       );
     });
   }
@@ -29,18 +51,7 @@ class ReviewList extends React.Component {
         handleSubmit={this.handleFormSubmit.bind(this)}
         openForm={this.state.openForm}
         />
-      )
-    //
-    // if (this.state.openForm) {
-    //   return (
-    //     <ReviewForm
-    //       handleSubmit={this.handleFormSubmit.bind(this)}
-    //       openForm={this.state.openForm}
-    //       />
-    //     )
-    // } else {
-    //   return (<div className="review--form closed"></div>);
-    // }
+    )
   }
 
   handleOpenForm(){
@@ -57,11 +68,15 @@ class ReviewList extends React.Component {
             className="button button--action">
             {this.state.openForm ? "Close" : "Leave a Review"}
           </button>
-          <div className={`review--form__transition ${this.state.openForm ? "open": "closed"}`} >            
-            {this.renderReviewForm()}
-          </div>
 
-          {this.renderReviews()}
+          {this.renderReviewForm()}
+          <FlipMove
+            className='review-list'
+            duration={500}
+            easing="ease-out"
+            >
+            {this.renderReviews()}
+          </FlipMove>
         </div>
       </div>
     );

@@ -11,7 +11,7 @@ class ReviewForm extends React.Component {
   handleFormSubmit(e){
     e.preventDefault();
     this.props.handleSubmit({
-      stars: this.state.stars,
+      rating: this.state.stars,
       title: this.state.title,
       body: this.state.body
     })

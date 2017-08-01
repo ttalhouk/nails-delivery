@@ -2,16 +2,11 @@ class ProductList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      searchTerm: '',
-      statusMessage: '',
-      errorMessage: ''
+      searchTerm: ''
     }
   }
   componentWillMount() {
-    this.updateStatusMessage({
-      success: this.props.statusMessage,
-      error: this.props.errorMessage
-    })
+
   }
 
   handleSearch(e){
@@ -30,7 +25,7 @@ class ProductList extends React.Component {
           <Product
             key={product.id}
             product={product}
-            updateMessage={(message) => { this.updateStatusMessage(message)}}/>
+            />
         )
       })
     } else {
@@ -42,49 +37,8 @@ class ProductList extends React.Component {
     }
   }
 
-  resetMessages(){
-    setTimeout(()=>{
-      this.setState({errorMessage: '', statusMessage: ''})
-    }, 10000)
-  }
-  updateStatusMessage(message){
-    if (message.error) {
-      this.setState({errorMessage: message.error});
-      this.resetMessages();
-    }
-    if (message.success) {
-      this.setState({statusMessage: message.success});
-      this.resetMessages();
-    }
-
-  }
-  renderMessages(){
-    if (this.state.statusMessage){
-      return (
-        <p>
-          {this.state.statusMessage}
-        </p>
-      )
-    } else if (this.state.errorMessage){
-      return (
-        <p>
-          {this.state.errorMessage}
-        </p>
-      )
-    }
-    return
-  }
-  statusClass() {
-    if (this.state.statusMessage){
-      return 'status-message--success';
-    } else if (this.state.errorMessage){
-      return 'status-message--error';
-    }
-    return 'status-message--close';
-  }
-
-
   render () {
+
     return (
       <div className='product--list'>
         <div className='product-list--header'>
@@ -92,9 +46,7 @@ class ProductList extends React.Component {
           <SearchBar
           handleSearch={() => this.handleSearch.bind(this)} searchTerm={this.state.searchTerm} />
         </div>
-        <div className={`status-message ${this.statusClass()}`}>
-          { this.renderMessages() }
-        </div>
+
         <FlipMove
           className='product-list--showcase'
           duration={500}
@@ -108,7 +60,5 @@ class ProductList extends React.Component {
 }
 
 ProductList.propTypes = {
-  products: React.PropTypes.array,
-  statusMessage: React.PropTypes.string,
-  errorMessage: React.PropTypes.string,
+  products: React.PropTypes.array
 };

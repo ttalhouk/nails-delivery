@@ -19,19 +19,15 @@
     };
   }
   &--form {
-    &__transition{
-      position: relative;
-      overflow: hidden;
-      height: 100%;
-      transition: height .5s ease-in-out;
-      &.closed {
-        height: 0px;
-      }
-    }
-    transform: translateY(0%);
-    transition: transform .5s ease-in-out;
+
+    // testing
+    position: relative;
+    overflow: hidden;;
+    max-height: 600px;
+    transition: max-height .5s ease-in-out;
     &.closed{
-      transform: translateY(-100%);
+      max-height: 0px;
+
     }
     p {
       font-style: italic;
@@ -83,6 +79,7 @@
   @include desktop{
     margin: 0 0 0 $space;
   };
+  resize: none;
 }
 
 .review--textarea {
@@ -98,4 +95,37 @@
 .review--star {
   font-size: $xl-font-size;
   color: $pink;
+}
+
+.review-list{
+  border-top: 3px solid $pink;
+  &--item{
+    padding: $space;
+    &__title {
+      display: inline-block;
+      padding-right: $space;
+      font-size: 2rem;
+      font-style: italic;
+    }
+    &__stars {
+      color: $pink;
+      font-size: 2rem;
+    }
+    &__review {
+      border-left: 2px solid $pink;
+      margin: $space;
+      padding:$space;
+    }
+    &__username {
+      display: inline-block;
+      font-style: italic;
+      font-weight: bold;
+      padding-right: .5rem;
+    }
+    &__timestamp {
+      color:lighten($body-default-color, 20%);
+      font-size: 1rem;
+      font-style: italic;
+    }
+  }
 }

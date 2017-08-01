@@ -5,8 +5,9 @@
     </p>
   </div>
 <% end %> -->
+<%= react_component 'FlashMessages', messages: flash_messages %>
 <%= react_component "ProductList", {
-  products: @products,
-  statusMessage:flash[:success], 
-  errorMessage:flash[:error]
+  products: @products
+  # statusMessage:flash[:success],
+  # errorMessage:flash[:error]
   } %>

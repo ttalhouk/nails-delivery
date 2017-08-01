@@ -24,23 +24,26 @@ class Product extends React.Component {
       dataType: 'json'
     })
       .success((data) => {
+        window.flash_messages.addMessage({
+          id: 'id',
+          text: `${this.props.product.name} successfully added to cart`,
+          type: 'success'
+        });
 
-        this.props.updateMessage({success: `${this.props.product.name} successfully added to cart`})
         this.closeModal();
       })
       .error((err) => {
         if (err.responseJSON.redirect){
           window.location.replace(err.responseJSON.redirect)
         } else {
-          this.props.updateMessage({error: err.responseJSON.messages})
+          window.flash_messages.addMessage({
+            id: 'id',
+            text: err.responseJSON.messages,
+            type: 'error'
+          });
           this.closeModal();
         }
-
       })
-    // close modal
-
-    // display message 'Item added' or 'Show Errors'
-
   }
   renderLimitedQty(stock) {
     if (stock < 10) {
@@ -100,6 +103,5 @@ class Product extends React.Component {
 }
 
 Product.propTypes = {
-  product: React.PropTypes.object,
-  updateMessage: React.PropTypes.func
+  product: React.PropTypes.object
 };
