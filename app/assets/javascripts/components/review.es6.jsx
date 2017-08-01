@@ -9,7 +9,6 @@ class Review extends React.Component {
     return stars
   }
   render () {
-    console.log('in review: ', this.props);
     return (
       <div className="review-list--item">
         <h3 className="review-list--item__title">
