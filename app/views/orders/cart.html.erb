@@ -1,0 +1,33 @@
+<div class="order-list">
+  <div class="order-list--header">
+    <h2 class="order-list--title">
+      <%= current_user.email%>'s Checkout
+    </h2>
+  </div>
+  <% @orders.each do |order| %>
+  <div class='order-list--item'>
+    <div class='order-list--item-details'>
+      <h3><%= order.product.name %></h3>
+    </div>
+    <div class='order-list--item-controls'>
+      <span class="order-list--item-price">
+        <%= number_to_currency(order.product.price) %> x
+      </span>
+      <span class="order-list--item-final-qty">
+        <%= order.qty %>
+      </span>
+      <span class="order-list--item-subtotal">
+          = <%= number_to_currency(order.qty * order.product.price) %>
+      </span>
+    </div>
+  </div>
+  <% end %>
+  <div class="order-list--purchase">
+    <p>
+      * For Demo only. Upon completion form for checkout here.
+    </p>
+    <br />
+    <%= link_to "Purchase", purchase_user_orders_path(current_user), method: :patch, class:"button button--order"
+    %>
+  </div>
+</div>

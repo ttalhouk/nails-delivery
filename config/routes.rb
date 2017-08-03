@@ -4,7 +4,12 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users, only: [:show] do
-    resources :orders, except: [:create, :new]
+    resources :orders, except: [:show, :create, :new] do
+      collection do
+        get 'cart'
+        patch 'purchase'
+      end
+    end
   end
   resources :orders, only: [:create]
   resources :products, only: [:index, :show] do

@@ -1,7 +1,9 @@
 class FlashMessages extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { messages: props.messages };
+    this.state = {
+      messages: props.messages
+    };
 
     window.flash_messages = this;
   }
@@ -18,8 +20,8 @@ class FlashMessages extends React.Component {
   }
 
   render () {
-    const alerts = this.state.messages.map( message =>
-      <Alert key={ message.id } message={ message }
+    const alerts = this.state.messages.map( (message, index) =>
+      <Alert key={ index } message={ message }
         onClose={ () => this.removeMessage(message) } />
     );
 

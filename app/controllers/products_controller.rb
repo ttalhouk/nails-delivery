@@ -4,9 +4,11 @@ class ProductsController < ApplicationController
     product_list = Product.all
     @products = []
     product_list.each do |product|
-      item =  product.attributes
-      item[:url] = product.image.url(:medium)
-      @products.push(item)
+      if (product.stock > 0)
+        item =  product.attributes
+        item[:url] = product.image.url(:medium)
+        @products.push(item)
+      end
     end
 
     # render component: "ProductList", props: {products: @products}

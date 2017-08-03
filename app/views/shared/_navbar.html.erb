@@ -13,6 +13,9 @@
           <% end %>
         </li>
         <li class="navbar__list--item">
+          <%= react_component 'Cart', {orderCount: get_order_count, user: current_user.id} %>
+        </li>
+        <li class="navbar__list--item">
           <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
         </li>
       <% else %>

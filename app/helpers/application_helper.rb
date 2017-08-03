@@ -5,4 +5,7 @@ module ApplicationHelper
       { id: text.object_id, type: type, text: text }
     end
   end
+  def get_order_count
+    return current_user.orders.where("fulfilled =?",false).count
+  end
 end

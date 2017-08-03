@@ -1,13 +1,5 @@
-<!-- <% flash.each do |key, value| %>
-  <div class="<%="status-message status-message--#{key}"%>" >
-    <p>
-      <%= value %>
-    </p>
-  </div>
-<% end %> -->
+
 <%= react_component 'FlashMessages', messages: flash_messages %>
 <%= react_component "ProductList", {
   products: @products
-  # statusMessage:flash[:success],
-  # errorMessage:flash[:error]
   } %>

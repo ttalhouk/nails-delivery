@@ -25,10 +25,11 @@ class Product extends React.Component {
     })
       .success((data) => {
         window.flash_messages.addMessage({
-          id: 'id',
+          id: data.order.id,
           text: `${this.props.product.name} successfully added to cart`,
           type: 'success'
         });
+        window.order_count.addOrder();
 
         this.closeModal();
       })
@@ -37,7 +38,7 @@ class Product extends React.Component {
           window.location.replace(err.responseJSON.redirect)
         } else {
           window.flash_messages.addMessage({
-            id: 'id',
+            id: err.responseJSON.messages,
             text: err.responseJSON.messages,
             type: 'error'
           });
