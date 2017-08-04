@@ -34,8 +34,13 @@ class Product extends React.Component {
         this.closeModal();
       })
       .error((err) => {
-        if (err.responseJSON.redirect){
-          window.location.replace(err.responseJSON.redirect)
+        if (err.status === 401){
+          window.location.replace("/users/sign_in");
+          window.flash_messages.addMessage({
+            id: err.responseJSON.error,
+            text: err.responseJSON.error,
+            type: 'error'
+          });
         } else {
           window.flash_messages.addMessage({
             id: err.responseJSON.messages,
