@@ -16,4 +16,7 @@
   &--action {
     @include style-button($purple);
   }
+  &--remove {
+    @include style-button(#B71C1C);
+  }
 }

@@ -21,3 +21,18 @@
     background-color: lighten($color, 10%);
   }
 }
+
+@mixin vert-center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space;
+  flex-direction: column;
+}
+
+@mixin vert-space-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
