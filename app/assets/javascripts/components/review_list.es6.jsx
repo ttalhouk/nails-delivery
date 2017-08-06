@@ -58,16 +58,26 @@ class ReviewList extends React.Component {
     this.setState({openForm: !this.state.openForm});
   }
 
+  renderReviewButton(){
+    if (this.props.user.email) {
+      return (
+        <button
+          onClick={this.handleOpenForm.bind(this)}
+          className="button button--action">
+          {this.state.openForm ? "Close" : "Leave a Review"}
+        </button>
+      );
+    } else {
+      return;
+    }
+  }
 
   render () {
     return (
       <div className='page--review-section'>
         <div className='review'>
-          <button
-            onClick={this.handleOpenForm.bind(this)}
-            className="button button--action">
-            {this.state.openForm ? "Close" : "Leave a Review"}
-          </button>
+          {this.renderReviewButton()}
+
 
           {this.renderReviewForm()}
           <FlipMove

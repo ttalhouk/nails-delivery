@@ -16,7 +16,7 @@
         <% if current_user %>
           <%= button_to "Add to Cart", orders_path, method: :post, params: {product: @product}, class: 'button button--order' %>
         <% else %>
-          <%= link_to "Login to add to Cart", new_user_session_path, class: 'button button--link' %>
+          <%= button_to "Login to add to Cart", new_user_session_path, method: :get, class: 'button button--link' %>
         <% end %>
       </div>
     </div>
