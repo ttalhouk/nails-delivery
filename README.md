@@ -1,24 +1,17 @@
-# README
+# Nail Shop
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+This is a site developed for an online store to sell nail products.  Built using Rails and react-rails and postgresql.
 
-* Ruby version
+## Getting Started
 
-* System dependencies
+*Getting the dependencies and setting up the database and running the server:*
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+> bundle install
+> rails db:create
+> rails db:migrate
+> rails s
+```
+Visit localhost:3000 to view online.
