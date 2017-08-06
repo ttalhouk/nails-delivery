@@ -14,8 +14,9 @@
 
   <%= render 'shared/navbar' %>
 
-  <main>
+  <main class="<%= content_for?(:whole_page) ? '': 'space' %>">  
     <%= yield %>
+    <%= yield :whole_page %>
   </main>
   </body>
 </html>

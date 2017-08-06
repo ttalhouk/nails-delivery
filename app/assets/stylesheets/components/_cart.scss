@@ -1,6 +1,6 @@
 .cart{
   position: relative;
-  text-align: center;
+  display: inline-block;
   &--icon {
     font-size: $large-font-size;
     font-weight: bold;

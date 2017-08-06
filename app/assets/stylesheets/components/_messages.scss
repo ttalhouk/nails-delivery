@@ -1,14 +1,17 @@
 .status-message {
   border-radius: 1rem;
   font-style: italic;
-  margin-bottom: $space;
   padding: $space;
   position: fixed;
-  top: 6rem;
+  top: 7rem;
   z-index: 9999;
-
+  left: 50%;
+  transform: translate(-50%, 0);
   text-align: center;
   transition: all .35s ease-in-out;
+  i {
+    margin-left: $space;
+  }
   &--success {
     background-color: $success-color;
   }

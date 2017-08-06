@@ -3,7 +3,11 @@
     <i class="ion-navicon-round"></i>
   </div>
   <div class="navbar">
-    <h1 class="navbar--title">Nail Delivery</h1>
+    <h1 class="navbar--title">
+      <%= link_to root_path do%>
+      Nail Shop
+      <% end %>
+    </h1>
 
     <ul id="nav-links" class="navbar__list" role='navigation'>
       <% if current_user %>

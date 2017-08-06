@@ -28,7 +28,7 @@ h2 {
 }
 
 
-main {
+main.space {
   @include desktop{
     padding: 6rem $space 0 $space;
   };
