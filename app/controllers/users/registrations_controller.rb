@@ -18,9 +18,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  def update
-    resource.update_resource(resource_params)
-  end
+  # def update
+  #   resource.update_resource(resource_params)
+  # end
 
 
   # DELETE /resource
@@ -38,10 +38,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # protected
-  def update_resource(resource, params)
-
-    resource.update_without_password(params(:user).permit(:first_name, :last_name, :address, :zip_code)
-  end
+  # def update_resource(resource, params)
+  #
+  #   resource.update_without_password(params(:user).permit(:first_name, :last_name, :address, :zip_code)
+  # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
