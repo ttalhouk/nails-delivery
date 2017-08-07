@@ -68,3 +68,4 @@ gem "responders"
 gem 'lodash-rails'
 gem 'autoprefixer-rails'
 gem 'react-rails'
+gem 'aws-sdk', '~> 2.3'
