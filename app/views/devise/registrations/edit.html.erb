@@ -1,10 +1,16 @@
 <%= react_component 'FlashMessages', messages: flash_messages %>
 <div class="login">
   <h2 class="login--title">Edit <%= resource_name.to_s.humanize %></h2>
-
+  <!-- Facebook auth -->
+  <h3>Facebook Settings</h3>
+  <% if resource.has_facebook_linked? %>
+  	<%= link_to "Unlink Facebook", authentication_path(resource), method: :delete %>
+  <% else %>
+  	<%= link_to "Link Facebook", omniauth_authorize_path(:user, :facebook) %>
+  <% end %>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class:"login--edit-form" }) do |f| %>
-  <%= devise_error_messages! %>
+  <!-- <%= devise_error_messages! %> -->
 
   <div class="field login--input">
     <%= f.label :email %><br />
@@ -18,7 +24,6 @@
   <div class="field login--input">
     <%= f.label :password %>
     <%= f.password_field :password, autocomplete: "off" %>
-
   </div>
   <i class="login--info">(leave blank if you don't want to change it)</i>
   <% if @minimum_password_length %>

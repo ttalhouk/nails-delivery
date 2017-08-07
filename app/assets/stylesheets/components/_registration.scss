@@ -1,6 +1,6 @@
 .login {
   @include vert-center-flex;
-  height: 80vh;
+  // height: 80vh;
   width: 100%;
   &--form {
     @include vert-space-flex;
@@ -26,12 +26,15 @@
     width: 100%;
     text-align: right;
     color: #2196F3;
+    margin-top: 0;
+    margin-bottom: $space;
   }
   &--input {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: $space;
     & input{
       border: 1px solid $pink;
       border-radius: 1rem;
@@ -47,16 +50,23 @@
     }
   }
   &--checkbox {
-    & label {
+    margin-bottom: $space;
+    label {
       padding-left: $space;
     }
-    & input {
+    input {
     }
+  }
+  .actions{
+    margin-bottom: $space;
   }
   &--links {
     border-top: 1px solid $pink;
     @include vert-space-flex;
-    height: 30%;
+    height: 50%;
+    * {
+      margin: .5rem 0;
+    }
 
   }
 }

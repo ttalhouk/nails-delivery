@@ -69,3 +69,6 @@ gem 'lodash-rails'
 gem 'autoprefixer-rails'
 gem 'react-rails'
 gem 'aws-sdk', '~> 2.3'
+
+gem 'omniauth-facebook'
+gem "figaro"
