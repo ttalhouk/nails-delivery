@@ -32,8 +32,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       # original
       @user = User.from_omniauth(request.env["omniauth.auth"])
-      p 'In omniauth User'
-      p @user
       sign_in_and_redirect @user
     end
 
