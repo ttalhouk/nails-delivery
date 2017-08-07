@@ -1,4 +1,4 @@
-class Users::RegistrationsController < Devise::RegistrationsController
+class RegistrationsController < Devise::RegistrationsController
 # before_action :configure_sign_up_params, only: [:create]
 # before_action :configure_account_update_params, only: [:update]
 
@@ -19,8 +19,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    resource.update_resource(resource_params)
+    if (resource.provider == 'facebook')
+      resource.update_without_password(facebook_params)
+    else
+      resource.update_resource(resource_params)
+    end
   end
+
 
 
   # DELETE /resource
@@ -38,11 +43,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # protected
-  def update_resource(resource, params)
-
-    resource.update_without_password(params(:user).permit(:first_name, :last_name, :address, :zip_code)
+  def facebook_params
+    params.require(:user).permit(:first_name, :last_name,:address,:zip_code)
   end
 
+  def account_update_params
+    params.require(:user).permit(:first_name, :last_name,:address,:zip_code, :email, :password, :password_confirmation, :current_password)
+  end
+
+  # def update_resource(resource, params)
+  #   resource.update_without_password(params)
+  # end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
