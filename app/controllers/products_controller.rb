@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
     product_list.each do |product|
       if (product.stock > 0)
         item =  product.attributes
-        item[:url] = product.image.url(:medium)
+        item[:url] = product.image.url(:medium).gsub('http', 'https')
         @products.push(item)
       end
     end
