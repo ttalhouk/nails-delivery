@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     :omniauth_callbacks => "users/omniauth_callbacks",
     :registrations => "registrations", only:[:update]
   }
+  resources :charges
   resources :authentications, only: [:destroy]
   resources :users, only: [:show] do
     resources :orders, except: [:show, :create, :new] do

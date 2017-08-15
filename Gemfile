@@ -40,7 +40,12 @@ group :development, :test do
 end
 
 group :test do
+  gem 'factory_girl'
   gem 'capybara', '2.7.1'
+  gem 'selenium-webdriver'
+  gem 'poltergeist'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -72,3 +77,4 @@ gem 'aws-sdk', '~> 2.3'
 
 gem 'omniauth-facebook'
 gem "figaro"
+gem 'stripe'
