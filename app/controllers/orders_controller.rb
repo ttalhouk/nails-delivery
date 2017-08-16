@@ -116,14 +116,16 @@ class OrdersController < ApplicationController
     else
       #make Stripe API Call
       @amount = @amount * 100
-
-      customer = Stripe::Customer.create(
-        :email => params[:stripeEmail],
-        :source  => params[:stripeToken]
-      )
+      if (!current_user.stripe_id)
+        customer = Stripe::Customer.create(
+          :email => params[:stripeEmail],
+          :source  => params[:stripeToken]
+        )
+        current_user.update(stripe_id: customer.id)
+      end
 
       charge = Stripe::Charge.create(
-        :customer    => customer.id,
+        :customer    => current_user.stripe_id,
         :amount      => @amount.to_i,
         :description => "Nail Shop Order for #{current_user.email}",
         :currency    => 'usd',
@@ -138,6 +140,10 @@ class OrdersController < ApplicationController
           p "in paid"
           @orders.update_all({fulfilled: true, purchase: charge.id})
           Product.update_product_qty(@orders)
+          @shipment = Shipment.create(address: getAddress)
+          @orders.each do |order|
+            @shipment.orders << order
+          end
           flash.now[:success] = "Order has been processed."
 
           format.html {redirect_to user_orders_path(current_user)}
@@ -182,6 +188,9 @@ class OrdersController < ApplicationController
   end
   def order_params
     params.require(:order).permit(:qty, :fulfilled)
+  end
+  def getAddress
+    return "#{params[:stripeBillingName]} \n #{params[:stripeShippingAddressLine1]} \n #{params[:stripeShippingAddressCity]}, #{params[:stripeShippingAddressState]} #{params[:stripeShippingAddressZip]}"
   end
 
 

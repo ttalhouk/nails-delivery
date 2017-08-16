@@ -48,7 +48,10 @@
         data-amount="<%= @orders.reduce(0) {|total, order| total + (order.qty * order.product.price * 100)} %>"
         data-name="Nail Shop"
         data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-
+        data-zip-code=true
+        data-email="<%= current_user.email %>"
+        data-billing-address= true
+        data-shipping-address= true
         data-locale="auto">
       </script>
     <% end %>
