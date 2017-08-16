@@ -1,4 +1,9 @@
 <div class="order-list">
+  <% if flash[:error].present? %>
+    <div id="error_explanation">
+      <p><%= flash[:error] %></p>
+    </div>
+  <% end %>
   <div class="order-list--header">
     <h2 class="order-list--title">
       <%= current_user.email%>'s Checkout
@@ -27,7 +32,25 @@
       * For Demo only. Upon completion form for checkout here.
     </p>
     <br />
-    <%= link_to "Purchase", purchase_user_orders_path(current_user), method: :patch, class:"button button--order"
-    %>
+    <!-- <%= link_to "Purchase", purchase_user_orders_path(current_user), method: :patch, class:"button button--order"
+    %> -->
+
+    <%= form_tag purchase_user_orders_path(current_user) do %>
+      <!-- <article>
+
+        <label class="amount">
+          <span>Amount: $5.00</span>
+        </label>
+      </article> -->
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button button button--order"
+        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+        data-description="<%= current_user.email%>'s Order"
+        data-amount="<%= @orders.reduce(0) {|total, order| total + (order.qty * order.product.price * 100)} %>"
+        data-name="Nail Shop"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+
+        data-locale="auto">
+      </script>
+    <% end %>
   </div>
 </div>

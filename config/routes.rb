@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :orders, except: [:show, :create, :new] do
       collection do
         get 'cart'
-        patch 'purchase'
+        post 'purchase'
       end
     end
   end
